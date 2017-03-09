@@ -141,15 +141,15 @@ int DisplayWidth, DisplayHeight, DisplayBits;
 FFont *SmallFont, *SmallFont2, *BigFont, *ConFont, *IntermissionFont;
 
 extern "C" {
-DWORD Col2RGB8[65][256];
-DWORD *Col2RGB8_LessPrecision[65];
-DWORD Col2RGB8_Inverse[65][256];
+uint32_t Col2RGB8[65][256];
+uint32_t *Col2RGB8_LessPrecision[65];
+uint32_t Col2RGB8_Inverse[65][256];
 ColorTable32k RGB32k;
 ColorTable256k RGB256k;
 }
 
 
-static DWORD Col2RGB8_2[63][256];
+static uint32_t Col2RGB8_2[63][256];
 
 // [RH] The framebuffer is no longer a mere byte array.
 // There's also only one, not four.
@@ -348,8 +348,8 @@ void DCanvas::Dim (PalEntry color, float damount, int x1, int y1, int w, int h)
 	if (damount == 0.f)
 		return;
 
-	DWORD *bg2rgb;
-	DWORD fg;
+	uint32_t *bg2rgb;
+	uint32_t fg;
 	int gap;
 	uint8_t *spot;
 	int x, y;
@@ -388,7 +388,7 @@ void DCanvas::Dim (PalEntry color, float damount, int x1, int y1, int w, int h)
 	{
 		for (x = w; x != 0; x--)
 		{
-			DWORD bg;
+			uint32_t bg;
 
 			bg = bg2rgb[(*spot)&0xff];
 			bg = (fg+bg) | 0x1f07c1f;
@@ -455,7 +455,7 @@ void DCanvas::ReleaseScreenshotBuffer()
 //
 //==========================================================================
 
-int V_GetColorFromString (const DWORD *palette, const char *cstr, FScriptPosition *sc)
+int V_GetColorFromString (const uint32_t *palette, const char *cstr, FScriptPosition *sc)
 {
 	int c[3], i, p;
 	char val[3];
@@ -647,7 +647,7 @@ FString V_GetColorStringByName (const char *name, FScriptPosition *sc)
 //
 //==========================================================================
 
-int V_GetColor (const DWORD *palette, const char *str, FScriptPosition *sc)
+int V_GetColor (const uint32_t *palette, const char *str, FScriptPosition *sc)
 {
 	FString string = V_GetColorStringByName (str, sc);
 	int res;
@@ -663,7 +663,7 @@ int V_GetColor (const DWORD *palette, const char *str, FScriptPosition *sc)
 	return res;
 }
 
-int V_GetColor(const DWORD *palette, FScanner &sc)
+int V_GetColor(const uint32_t *palette, FScanner &sc)
 {
 	FScriptPosition scc = sc;
 	return V_GetColor(palette, sc.String, &scc);
@@ -899,8 +899,8 @@ void DFrameBuffer::DrawRateStuff ()
 	// Draws frame time and cumulative fps
 	if (vid_fps)
 	{
-		DWORD ms = I_FPSTime();
-		DWORD howlong = ms - LastMS;
+		uint32_t ms = I_FPSTime();
+		uint32_t howlong = ms - LastMS;
 		if ((signed)howlong >= 0)
 		{
 			char fpsbuff[40];
@@ -920,7 +920,7 @@ void DFrameBuffer::DrawRateStuff ()
 					DTA_VirtualHeight, screen->GetHeight() / textScale,
 					DTA_KeepRatio, true, TAG_DONE);
 
-			DWORD thisSec = ms/1000;
+			uint32_t thisSec = ms/1000;
 			if (LastSec < thisSec)
 			{
 				LastCount = FrameCount / (thisSec - LastSec);

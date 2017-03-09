@@ -2645,10 +2645,10 @@ static void R_DrawMaskedSegsBehindParticle (const vissprite_t *vis)
 
 void R_DrawParticle_C (vissprite_t *vis)
 {
-	DWORD *bg2rgb;
+	uint32_t *bg2rgb;
 	int spacing;
 	uint8_t *dest;
-	DWORD fg;
+	uint32_t fg;
 	uint8_t color = vis->colormap[vis->startfrac];
 	int yl = vis->y1;
 	int ycount = vis->y2 - yl + 1;
@@ -2662,7 +2662,7 @@ void R_DrawParticle_C (vissprite_t *vis)
 	// vis->renderflags holds translucency level (0-255)
 	{
 		fixed_t fglevel, bglevel;
-		DWORD *fg2rgb;
+		uint32_t *fg2rgb;
 
 		fglevel = ((vis->renderflags + 1) << 8) & ~0x3ff;
 		bglevel = FRACUNIT-fglevel;
@@ -2702,7 +2702,7 @@ void R_DrawParticle_C (vissprite_t *vis)
 		dest = ylookup[yl] + x + dc_destorg;
 		for (int y = 0; y < ycount; y++)
 		{
-			DWORD bg = bg2rgb[*dest];
+			uint32_t bg = bg2rgb[*dest];
 			bg = (fg+bg) | 0x1f07c1f;
 			*dest = RGB32k.All[bg & (bg>>15)];
 			dest += spacing;

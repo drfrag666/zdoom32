@@ -584,7 +584,7 @@ void R_HighlightPortal (PortalDrawseg* pds)
 	// [ZZ] NO OVERFLOW CHECKS HERE
 	//      I believe it won't break. if it does, blame me. :(
 
-	uint8_t color = (uint8_t)BestColor((DWORD *)GPalette.BaseColors, 255, 0, 0, 0, 255);
+	uint8_t color = (uint8_t)BestColor((uint32_t *)GPalette.BaseColors, 255, 0, 0, 0, 255);
 
 	uint8_t* pixels = RenderTarget->GetBuffer();
 	// top edge
@@ -621,7 +621,7 @@ void R_EnterPortal (PortalDrawseg* pds, int depth)
 	// [ZZ] check depth. fill portal with black if it's exceeding the visual recursion limit, and continue like nothing happened.
 	if (depth >= r_portal_recursions)
 	{
-		uint8_t color = (uint8_t)BestColor((DWORD *)GPalette.BaseColors, 0, 0, 0, 0, 255);
+		uint8_t color = (uint8_t)BestColor((uint32_t *)GPalette.BaseColors, 0, 0, 0, 0, 255);
 		int spacing = RenderTarget->GetPitch();
 		for (int x = pds->x1; x < pds->x2; x++)
 		{

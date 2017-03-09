@@ -628,7 +628,7 @@ extern FTexture *rw_pic;
 // since the most anyone can ever see of the sky is 500 pixels.
 // We need 4 skybufs because R_DrawSkySegment can draw up to 4 columns at a time.
 static uint8_t skybuf[4][512];
-static DWORD lastskycol[4];
+static uint32_t lastskycol[4];
 static int skycolplace;
 
 // Get a column of sky when there is only one sky texture.
@@ -641,13 +641,13 @@ static const uint8_t *R_GetOneSkyColumn (FTexture *fronttex, int x)
 // Get a column of sky when there are two overlapping sky textures
 static const uint8_t *R_GetTwoSkyColumns (FTexture *fronttex, int x)
 {
-	DWORD ang = (skyangle + xtoviewangle[x]) ^ skyflip;
-	DWORD angle1 = (DWORD)((UMulScale16(ang, frontcyl) + frontpos) >> FRACBITS);
-	DWORD angle2 = (DWORD)((UMulScale16(ang, backcyl) + backpos) >> FRACBITS);
+	uint32_t ang = (skyangle + xtoviewangle[x]) ^ skyflip;
+	uint32_t angle1 = (uint32_t)((UMulScale16(ang, frontcyl) + frontpos) >> FRACBITS);
+	uint32_t angle2 = (uint32_t)((UMulScale16(ang, backcyl) + backpos) >> FRACBITS);
 
 	// Check if this column has already been built. If so, there's
 	// no reason to waste time building it again.
-	DWORD skycol = (angle1 << 16) | angle2;
+	uint32_t skycol = (angle1 << 16) | angle2;
 	int i;
 
 	for (i = 0; i < 4; ++i)
@@ -701,11 +701,11 @@ static void R_DrawSkyColumnStripe(int start_x, int y1, int y2, int columns, doub
 		if (MirrorFlags & RF_XFLIP)
 			x = (viewwidth - x);
 
-		DWORD ang, angle1, angle2;
+		uint32_t ang, angle1, angle2;
 
 		ang = (skyangle + xtoviewangle[x]) ^ skyflip;
-		angle1 = (DWORD)((UMulScale16(ang, frontcyl) + frontpos) >> FRACBITS);
-		angle2 = (DWORD)((UMulScale16(ang, backcyl) + backpos) >> FRACBITS);
+		angle1 = (uint32_t)((UMulScale16(ang, frontcyl) + frontpos) >> FRACBITS);
+		angle2 = (uint32_t)((UMulScale16(ang, backcyl) + backpos) >> FRACBITS);
 
 		dc_wall_source[i] = (const uint8_t *)frontskytex->GetColumn(angle1, nullptr);
 		dc_wall_source2[i] = backskytex ? (const uint8_t *)backskytex->GetColumn(angle2, nullptr) : nullptr;

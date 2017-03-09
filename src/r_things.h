@@ -62,7 +62,7 @@ struct vissprite_t
 	float			depth;
 	float			idepth;			// 1/z
 	float			deltax, deltay;
-	DWORD			FillColor;
+	uint32_t		FillColor;
 	double			floorclip;
 	union
 	{
@@ -94,7 +94,7 @@ struct vissprite_t
 	uint8_t			FakeFlatStat;	// [RH] which side of fake/floor ceiling sprite is on
 	uint8_t			ColormapNum;	// Which colormap is rendered (needed for shaded drawer)
 	short 			renderflags;
-	DWORD			Translation;	// [RH] for color translation
+	uint32_t		Translation;	// [RH] for color translation
 	lighttable_t	*colormap;
 	FRenderStyle	RenderStyle;
 	visstyle_t		Style;

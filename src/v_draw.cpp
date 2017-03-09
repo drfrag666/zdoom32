@@ -532,7 +532,7 @@ static inline FColormapStyle * ListGetColormapStyle(VMVa_List &tags)
 }
 
 template<class T>
-bool DCanvas::ParseDrawTextureTags(FTexture *img, double x, double y, DWORD tag, T& tags, DrawParms *parms, bool fortext) const
+bool DCanvas::ParseDrawTextureTags(FTexture *img, double x, double y, uint32_t tag, T& tags, DrawParms *parms, bool fortext) const
 {
 	INTBOOL boolval;
 	int intval;
@@ -958,8 +958,8 @@ bool DCanvas::ParseDrawTextureTags(FTexture *img, double x, double y, DWORD tag,
 }
 // explicitly instantiate both versions for v_text.cpp.
 
-template bool DCanvas::ParseDrawTextureTags<Va_List>(FTexture *img, double x, double y, DWORD tag, Va_List& tags, DrawParms *parms, bool fortext) const;
-template bool DCanvas::ParseDrawTextureTags<VMVa_List>(FTexture *img, double x, double y, DWORD tag, VMVa_List& tags, DrawParms *parms, bool fortext) const;
+template bool DCanvas::ParseDrawTextureTags<Va_List>(FTexture *img, double x, double y, uint32_t tag, Va_List& tags, DrawParms *parms, bool fortext) const;
+template bool DCanvas::ParseDrawTextureTags<VMVa_List>(FTexture *img, double x, double y, uint32_t tag, VMVa_List& tags, DrawParms *parms, bool fortext) const;
 
 void DCanvas::VirtualToRealCoords(double &x, double &y, double &w, double &h,
 	double vwidth, double vheight, bool vbottom, bool handleaspect) const
@@ -1125,10 +1125,10 @@ void DCanvas::PUTTRANSDOT (int xx, int yy, int basecolor, int level)
 	}
 
 	uint8_t *spot = GetBuffer() + oldyyshifted + xx;
-	DWORD *bg2rgb = Col2RGB8[1+level];
-	DWORD *fg2rgb = Col2RGB8[63-level];
-	DWORD fg = fg2rgb[basecolor];
-	DWORD bg = bg2rgb[*spot];
+	uint32_t *bg2rgb = Col2RGB8[1+level];
+	uint32_t *fg2rgb = Col2RGB8[63-level];
+	uint32_t fg = fg2rgb[basecolor];
+	uint32_t bg = bg2rgb[*spot];
 	bg = (fg+bg) | 0x1f07c1f;
 	*spot = RGB32k.All[bg&(bg>>15)];
 }
@@ -1261,7 +1261,7 @@ void DCanvas::DrawLine(int x0, int y0, int x1, int y1, int palColor, uint32_t re
 		}
 		else
 		{ // x-major line
-			fixed_t errorAdj = (((DWORD) deltaY << 16) / (DWORD) deltaX) & 0xffff;
+			fixed_t errorAdj = (((uint32_t) deltaY << 16) / (uint32_t) deltaX) & 0xffff;
 
 			if (WeightingScale == 0)
 			{
