@@ -403,7 +403,7 @@ public:
 	}
 
 	bool CopyPlaneIfValid (secplane_t *dest, const secplane_t *opp) const;
-	inline double secplane_t::ZatPoint(const AActor *ac) const;
+	inline double ZatPoint(const AActor *ac) const;
 
 };
 
