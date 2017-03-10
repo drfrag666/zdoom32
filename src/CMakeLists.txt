@@ -573,6 +573,7 @@ endif()
 
 # Start defining source files for ZDoom
 set( PLAT_WIN32_SOURCES
+	sound/mididevices/music_win_mididevice.cpp
 	win32/eaxedit.cpp
 	win32/critsec.cpp
 	win32/fb_d3d9.cpp
@@ -612,6 +613,7 @@ set( PLAT_UNIX_SOURCES
 	posix/unix/i_specialpaths.cpp
 	posix/unix/iwadpicker_gtk.cpp )
 set( PLAT_OSX_SOURCES
+	sound/mididevices/music_audiotoolbox_mididevice.cpp
 	posix/osx/iwadpicker_cocoa.mm
 	posix/osx/i_specialpaths.mm
 	posix/osx/zdoom.icns )
@@ -795,15 +797,6 @@ set( FASTMATH_SOURCES
 	sound/music_stream.cpp
 	sound/oalsound.cpp
 	sound/sndfile_decoder.cpp
-	sound/mididevices/music_opldumper_mididevice.cpp
-	sound/mididevices/music_opl_mididevice.cpp
-	sound/mididevices/music_pseudo_mididevice.cpp
-	sound/mididevices/music_fluidsynth_mididevice.cpp
-	sound/mididevices/music_softsynth_mididevice.cpp
-	sound/mididevices/music_timidity_mididevice.cpp
-	sound/mididevices/music_wildmidi_mididevice.cpp
-	sound/mididevices/music_win_mididevice.cpp
-	sound/mididevices/music_audiotoolbox_mididevice.cpp
 	sound/mididevices/music_midi_timidity.cpp
 )
 
@@ -1035,6 +1028,13 @@ set (PCH_SOURCES
 	scripting/zscript/zcc_compile.cpp
 	scripting/zscript/zcc_parser.cpp
 	sfmt/SFMT.cpp
+	sound/mididevices/music_opldumper_mididevice.cpp
+	sound/mididevices/music_opl_mididevice.cpp
+	sound/mididevices/music_pseudo_mididevice.cpp
+	sound/mididevices/music_fluidsynth_mididevice.cpp
+	sound/mididevices/music_softsynth_mididevice.cpp
+	sound/mididevices/music_timidity_mididevice.cpp
+	sound/mididevices/music_wildmidi_mididevice.cpp
 	sound/timidity/common.cpp
 	sound/timidity/instrum.cpp
 	sound/timidity/instrum_dls.cpp
