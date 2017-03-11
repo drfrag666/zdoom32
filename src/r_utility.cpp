@@ -105,33 +105,31 @@ DCanvas			*RenderTarget;		// [RH] canvas to render to
 
 int 			viewwindowx;
 int 			viewwindowy;
+int				viewwidth;
+int 			viewheight;
 
 DVector3		ViewPos;
 DAngle			ViewAngle;
 DAngle			ViewPitch;
 DAngle			ViewRoll;
 DVector3		ViewPath[2];
+double	 		ViewCos, ViewTanCos;
+double	 		ViewSin, ViewTanSin;
 
-extern "C" 
-{
-		int 	viewwidth;
-		int 	viewheight;
-		int		centerx;
-		int		centery;
-		int		centerxwide;
-}
+
+int		centerx;
+int		centery;
+int		centerxwide;
 
 int				otic;
 
 sector_t		*viewsector;
 
-double	 		ViewCos, ViewTanCos;
-double	 		ViewSin, ViewTanSin;
 
 AActor			*camera;	// [RH] camera to draw from. doesn't have to be a player
 
 double			r_TicFracF;			// same as floating point
-uint32_t			r_FrameTime;		// [RH] Time this frame started drawing (in ms)
+uint32_t		r_FrameTime;		// [RH] Time this frame started drawing (in ms)
 bool			r_NoInterpolate;
 bool			r_showviewer;
 

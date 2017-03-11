@@ -33,8 +33,10 @@
 //	for rendering.
 //
 
-extern "C" int			viewwidth;
-extern "C" int			viewheight;
+extern int				viewwindowx;
+extern int				viewwindowy;
+extern int				viewwidth;
+extern int				viewheight;
 
 //
 // Lookup tables for map data.
@@ -65,11 +67,8 @@ extern int 				numgamesubsectors;
 //
 // POV data.
 //
-extern AActor*			camera;		// [RH] camera instead of viewplayer
-extern sector_t*		viewsector;	// [RH] keep track of sector viewing from
 
 namespace swrenderer { extern angle_t			xtoviewangle[MAXWIDTH+1]; }
-extern DAngle			FieldOfView;
 
 int R_FindSkin (const char *name, int pclass);	// [RH] Find a skin
 
