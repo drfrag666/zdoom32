@@ -1902,7 +1902,7 @@ void AM_drawSubsectors()
 	int floorlight, ceilinglight;
 	double scalex, scaley;
 	double originx, originy;
-	FDynamicColormap *colormap;
+	FColormap colormap;
 	PalEntry flatcolor;
 	mpoint_t originpt;
 
@@ -1944,7 +1944,7 @@ void AM_drawSubsectors()
 		originpt.y = sec->GetYOffset(sector_t::floor);
 		rotation = -sec->GetAngle(sector_t::floor);
 		// Coloring for the polygon
-		colormap = sec->ColorMap;
+		colormap = sec->Colormap;
 
 		FTextureID maptex = sec->GetTexture(sector_t::floor);
 		flatcolor = sec->SpecialColors[sector_t::floor];
@@ -2036,14 +2036,11 @@ void AM_drawSubsectors()
 		// to see it on the map), tint and desaturate it.
 		if (!(subsectors[i].flags & SSECF_DRAWN))
 		{
-			colormap = GetSpecialLights(
-				MAKERGB(
-					(colormap->Color.r + 255) / 2,
-					(colormap->Color.g + 200) / 2,
-					(colormap->Color.b + 160) / 2),
-				colormap->Fade,
-				255 - (255 - colormap->Desaturate) / 4);
-			floorlight = (floorlight + 200 * 15) / 16;
+			colormap.LightColor = PalEntry(
+				(colormap.LightColor.r + 255) / 2,
+				(colormap.LightColor.g + 200) / 2,
+				(colormap.LightColor.b + 160) / 2);
+			colormap.Desaturation = 255 - (255 - colormap.Desaturation) / 4;
 		}
 
 		// Draw the polygon.

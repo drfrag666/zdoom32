@@ -1581,7 +1581,7 @@ DEFINE_ACTION_FUNCTION(_Screen, Dim)
 
 void DCanvas::FillSimplePoly(FTexture *tex, FVector2 *points, int npoints,
 	double originx, double originy, double scalex, double scaley, DAngle rotation,
-	FDynamicColormap *colormap, PalEntry flatcolor, int lightlevel, int bottomclip)
+	const FColormap &colormap, PalEntry flatcolor, int lightlevel, int bottomclip)
 {
 #ifndef NO_SWRENDER
 	using namespace swrenderer;
@@ -1653,7 +1653,7 @@ void DCanvas::FillSimplePoly(FTexture *tex, FVector2 *points, int npoints,
 
 	// Setup constant texture mapping parameters.
 	R_SetupSpanBits(tex);
-	R_SetSpanColormap(colormap != NULL ? &colormap->Maps[clamp(shade >> FRACBITS, 0, NUMCOLORMAPS-1) * 256] : identitymap);
+	R_SetSpanColormap(GetColorTable(colormap) != NULL ? &GetColorTable(colormap)->Maps[clamp(shade >> FRACBITS, 0, NUMCOLORMAPS-1) * 256] : identitymap);
 	R_SetSpanSource(tex);
 	if (ds_xbits != 0)
 	{

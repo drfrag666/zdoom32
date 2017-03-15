@@ -424,7 +424,7 @@ static void ProcessStripedWall(int x1, int x2, short *uwal, short *dwal, float *
 		}
 
 		lightlist_t *lit = &frontsector->e->XFloor.lightlist[i];
-		basecolormap = lit->extra_colormap;
+		basecolormap = GetColorTable(lit->extra_colormap);
 		wallshade = LIGHT2SHADE(curline->sidedef->GetLightLevel(fogginess,
 			*lit->p_lightlevel, lit->lightsource != NULL) + r_actualextralight);
  	}

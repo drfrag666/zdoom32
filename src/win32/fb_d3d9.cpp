@@ -3094,7 +3094,7 @@ void D3DFB::FlatFill(int left, int top, int right, int bottom, FTexture *src, bo
 
 void D3DFB::FillSimplePoly(FTexture *texture, FVector2 *points, int npoints,
 	double originx, double originy, double scalex, double scaley,
-	DAngle rotation, FDynamicColormap *colormap, PalEntry flatcolor, int lightlevel, int bottomclip)
+	DAngle rotation, const FColormap &colormap, PalEntry flatcolor, int lightlevel, int bottomclip)
 {
 	// Use an equation similar to player sprites to determine shade
 	double fadelevel = clamp((LIGHT2SHADE(lightlevel)/65536. - 12) / NUMCOLORMAPS, 0.0, 1.0);
@@ -3143,20 +3143,17 @@ void D3DFB::FillSimplePoly(FTexture *texture, FVector2 *points, int npoints,
 	{
 		quad->Flags = BQF_WrapUV | BQF_GamePalette | BQF_DisableAlphaTest;
 		quad->ShaderNum = BQS_PalTex;
-		if (colormap != NULL)
+		if (colormap.Desaturation != 0)
 		{
-			if (colormap->Desaturate != 0)
-			{
-				quad->Flags |= BQF_Desaturated;
-			}
-			quad->ShaderNum = BQS_InGameColormap;
-			quad->Desat = colormap->Desaturate;
-			color0 = D3DCOLOR_ARGB(255, colormap->Color.r, colormap->Color.g, colormap->Color.b);
-			color1 = D3DCOLOR_ARGB(DWORD((1 - fadelevel) * 255),
-				DWORD(colormap->Fade.r * fadelevel),
-				DWORD(colormap->Fade.g * fadelevel),
-				DWORD(colormap->Fade.b * fadelevel));
+			quad->Flags |= BQF_Desaturated;
 		}
+		quad->ShaderNum = BQS_InGameColormap;
+		quad->Desat = colormap.Desaturation;
+		color0 = D3DCOLOR_ARGB(255, colormap.LightColor.r, colormap.LightColor.g, colormap.LightColor.b);
+		color1 = D3DCOLOR_ARGB(DWORD((1 - fadelevel) * 255),
+			DWORD(colormap.FadeColor.r * fadelevel),
+			DWORD(colormap.FadeColor.g * fadelevel),
+			DWORD(colormap.FadeColor.b * fadelevel));
 	}
 	else
 	{
