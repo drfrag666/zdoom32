@@ -1276,6 +1276,7 @@ struct subsector_t
 	int			flags;
 
 	void BuildPolyBSP();
+	int Index() const;
 };
 
 
@@ -1316,7 +1317,6 @@ struct FMiniBSP
 	TArray<subsector_t> Subsectors;
 	TArray<vertex_t> Verts;
 };
-
 
 
 //

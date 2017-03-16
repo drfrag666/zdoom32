@@ -1063,8 +1063,8 @@ void R_Subsector (subsector_t *sub)
 	}
 
 #ifdef RANGECHECK
-	if (outersubsector && sub - subsectors >= (ptrdiff_t)numsubsectors)
-		I_Error ("R_Subsector: ss %ti with numss = %i", sub - subsectors, numsubsectors);
+	if (outersubsector && (unsigned)sub->Index() >= level.subsectors.Size())
+		I_Error ("R_Subsector: ss %ti with numss = %u", sub->Index(), level.subsectors.Size());
 #endif
 
 	assert(sub->sector != NULL);
@@ -1308,12 +1308,12 @@ void R_Subsector (subsector_t *sub)
 		ceilinglightlevel : floorlightlevel, FakeSide);
 
 	// [RH] Add particles
-	if ((unsigned int)(sub - subsectors) < (unsigned int)numsubsectors)
+	if ((unsigned int)(sub->Index()) < level.subsectors.Size())
 	{ // Only do it for the main BSP.
 		int shade = LIGHT2SHADE((floorlightlevel + ceilinglightlevel)/2 + r_actualextralight);
-		for (uint16_t i = ParticlesInSubsec[(unsigned int)(sub-subsectors)]; i != NO_PARTICLE; i = Particles[i].snext)
+		for (uint16_t i = ParticlesInSubsec[sub->Index()]; i != NO_PARTICLE; i = Particles[i].snext)
 		{
-			R_ProjectParticle (Particles + i, subsectors[sub-subsectors].sector, shade, FakeSide);
+			R_ProjectParticle (Particles + i, sub->sector, shade, FakeSide);
 		}
 	}
 
@@ -1374,7 +1374,7 @@ void R_RenderBSPNode (void *node)
 {
 	if (numnodes == 0)
 	{
-		R_Subsector (subsectors);
+		R_Subsector (&level.subsectors[0]);
 		return;
 	}
 	while (!((size_t)node & 1))  // Keep going until found a subsector
