@@ -273,6 +273,7 @@ public:
 	static void FlipNonSquareBlockRemap (uint8_t *blockto, const uint8_t *blockfrom, int x, int y, int srcpitch, const uint8_t *remap);
 
 	friend class D3DTex;
+	int CheckRealHeight();
 };
 
 class FxAddSub;
