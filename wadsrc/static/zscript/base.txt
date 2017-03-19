@@ -713,3 +713,13 @@ struct LookExParams
 	int flags;
 	State seestate;
 };
+
+class SectorEffect : Thinker native
+{
+	native protected Sector m_Sector;
+}
+
+class Lighting : SectorEffect native
+{
+}
+
