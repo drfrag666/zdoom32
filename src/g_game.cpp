@@ -234,8 +234,6 @@ FString			shotfile;
 AActor* 		bodyque[BODYQUESIZE]; 
 int 			bodyqueslot; 
 
-void R_ExecuteSetViewSize (void);
-
 FString savename;
 FString BackupSaveName;
 
