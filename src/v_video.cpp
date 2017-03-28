@@ -406,6 +406,7 @@ DEFINE_ACTION_FUNCTION(_Screen, Dim)
 	PARAM_INT(y1);
 	PARAM_INT(w);
 	PARAM_INT(h);
+	if (!screen->HasBegun2D()) ThrowAbortException(X_OTHER, "Attempt to draw to screen outside a draw function");
 	screen->Dim(color, float(amount), x1, y1, w, h);
 	return 0;
 }
