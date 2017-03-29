@@ -66,6 +66,11 @@
 
 CUSTOM_CVAR(Int, uiscale, 2, CVAR_ARCHIVE | CVAR_NOINITCALL)
 {
+	if (self < 0)
+	{
+		self = 0;
+		return;
+	}
 	if (StatusBar != NULL)
 	{
 		StatusBar->CallScreenSizeChanged();
@@ -1785,10 +1790,9 @@ static void V_DrawViewBorder (void)
 	V_DrawBorder (0, 0, SCREENWIDTH, viewwindowy);
 	V_DrawBorder (0, viewwindowy, viewwindowx, viewheight + viewwindowy);
 	V_DrawBorder (viewwindowx + viewwidth, viewwindowy, SCREENWIDTH, viewheight + viewwindowy);
-	V_DrawBorder (0, viewwindowy + viewheight, SCREENWIDTH, gST_Y);
+	V_DrawBorder (0, viewwindowy + viewheight, SCREENWIDTH, StatusBar->GetTopOfStatusbar());
 
 	V_DrawFrame (viewwindowx, viewwindowy, viewwidth, viewheight);
-	V_MarkRect (0, 0, SCREENWIDTH, gST_Y);
 }
 
 //==========================================================================

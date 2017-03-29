@@ -195,13 +195,6 @@ bool	setmodeneeded = false;
 int		NewWidth, NewHeight, NewBits;
 
 
-//
-// V_MarkRect 
-// 
-void V_MarkRect (int x, int y, int width, int height)
-{
-}
-
 DCanvas *DCanvas::CanvasChain = NULL;
 
 //==========================================================================

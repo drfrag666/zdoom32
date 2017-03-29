@@ -68,7 +68,6 @@
 #include "r_thread.h"
 #include "events.h"
 
-EXTERN_CVAR(Bool, st_scale)
 EXTERN_CVAR(Bool, r_shadercolormaps)
 EXTERN_CVAR(Int, r_drawfuzz)
 EXTERN_CVAR(Bool, r_deathcamera);
@@ -1371,7 +1370,7 @@ void R_DrawPSprite(DPSprite *pspr, AActor *owner, float bobx, float boby, double
 
 	if (camera->player && (RenderTarget != screen ||
 		viewheight == RenderTarget->GetHeight() ||
-		(RenderTarget->GetWidth() > (BASEXCENTER * 2) && !st_scale)))
+		(RenderTarget->GetWidth() > (BASEXCENTER * 2))))
 	{	// Adjust PSprite for fullscreen views
 		AWeapon *weapon = dyn_cast<AWeapon>(pspr->GetCaller());
 		if (weapon != nullptr && weapon->YAdjust != 0)
