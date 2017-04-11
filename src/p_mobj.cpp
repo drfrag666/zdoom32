@@ -1607,20 +1607,16 @@ bool AActor::IsVisibleToPlayer() const
 
 	const player_t* pPlayer = players[consoleplayer].camera->player;
 
-	if (pPlayer && pPlayer->mo && GetClass()->VisibleToPlayerClass.Size() > 0)
+	if (pPlayer)
 	{
-		bool visible = false;
-		for(unsigned int i = 0;i < GetClass()->VisibleToPlayerClass.Size();++i)
+		for(auto cls : GetInfo()->VisibleToPlayerClass)
 		{
-			auto cls = GetClass()->VisibleToPlayerClass[i];
 			if (cls && pPlayer->mo->GetClass()->IsDescendantOf(cls))
 			{
-				visible = true;
-				break;
+				return true;
 			}
 		}
-		if (!visible)
-			return false;
+		return false;
 	}
 
 	// [BB] Passed all checks.
@@ -7688,7 +7684,7 @@ DEFINE_ACTION_FUNCTION(AActor, GetCameraHeight)
 
 FDropItem *AActor::GetDropItems() const
 {
-	return GetClass()->DropItems;
+	return GetInfo()->DropItems;
 }
 
 DEFINE_ACTION_FUNCTION(AActor, GetDropItems)
@@ -7825,7 +7821,7 @@ int AActor::ApplyDamageFactor(FName damagetype, int damage) const
 	damage = int(damage * DamageFactor);
 	if (damage > 0)
 	{
-		damage = DamageTypeDefinition::ApplyMobjDamageFactor(damage, damagetype, &GetClass()->DamageFactors);
+		damage = DamageTypeDefinition::ApplyMobjDamageFactor(damage, damagetype, &GetInfo()->DamageFactors);
 	}
 	return damage;
 }
@@ -8276,7 +8272,7 @@ DEFINE_ACTION_FUNCTION(AActor, ApplyDamageFactors)
 	PARAM_INT(damage);
 	PARAM_INT(defdamage);
 
-	DmgFactors &df = itemcls->DamageFactors;
+	DmgFactors &df = itemcls->ActorInfo()->DamageFactors;
 	if (df.Size() != 0)
 	{
 		ACTION_RETURN_INT(df.Apply(damagetype, damage));

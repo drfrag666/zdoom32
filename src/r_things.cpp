@@ -1244,7 +1244,7 @@ void R_AddSprites (sector_t *sec, int lightlevel, int fakeside)
 		if (thing->validcount == validcount) continue;
 		thing->validcount = validcount;
 		
-		FIntCVar *cvar = thing->GetClass()->distancecheck;
+		FIntCVar *cvar = thing->GetInfo()->distancecheck;
 		if (cvar != NULL && *cvar >= 0)
 		{
 			double dist = (thing->Pos() - ViewPos).LengthSquared();
