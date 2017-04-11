@@ -204,11 +204,11 @@ struct FStateLabels
 
 #include "gametype.h"
 
-struct DmgFactors : public TMap<FName, double>
+struct DmgFactors : public TArray<std::pair<FName, double>>
 {
 	int Apply(FName type, int damage);
 };
-typedef TMap<FName, int> PainChanceList;
+typedef TArray<std::pair<FName, int>> PainChanceList;
 
 struct DamageTypeDefinition
 {
@@ -247,11 +247,18 @@ struct FActorInfo
 	PClassActor *Replacee = nullptr;
 	FState *OwnedStates = nullptr;
 	int NumOwnedStates = 0;
+	uint8_t GameFilter = GAME_Any;
+	uint16_t SpawnID = 0;
+	uint16_t ConversationID = 0;
+	int16_t DoomEdNum = 0;
+
+	uint8_t DefaultStateUsage = 0; // state flag defaults for blocks without a qualifier.
 
 	FActorInfo() {}
 	FActorInfo(const FActorInfo & other)
 	{
 		LightAssociations = other.LightAssociations;
+		DefaultStateUsage = other.DefaultStateUsage;
 	}
 };
 
@@ -296,14 +303,9 @@ public:
 	PClassActor *GetReplacement(bool lookskill=true);
 	PClassActor *GetReplacee(bool lookskill=true);
 
-	uint8_t GameFilter;
-	uint8_t DefaultStateUsage; // state flag defaults for blocks without a qualifier.
-	uint16_t SpawnID;
-	uint16_t ConversationID;
-	int16_t DoomEdNum;
 	FStateLabels *StateList;
-	DmgFactors *DamageFactors;
-	PainChanceList *PainChances;
+	DmgFactors DamageFactors;
+	PainChanceList PainChances;
 
 	TArray<PClassActor *> VisibleToPlayerClass;
 
