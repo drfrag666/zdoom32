@@ -251,7 +251,6 @@ public:
 	PClassActor();
 	~PClassActor();
 
-	virtual size_t PointerSubstitution(DObject *oldclass, DObject *newclass);
 	void BuildDefaults();
 	void ApplyDefaults(uint8_t *defaults);
 	void RegisterIDs();
