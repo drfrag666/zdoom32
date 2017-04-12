@@ -111,6 +111,8 @@
 #include "fragglescript/t_fs.h"
 #include "g_levellocals.h"
 #include "events.h"
+#include "vm.h"
+#include "types.h"
 
 EXTERN_CVAR(Bool, hud_althud)
 void DrawHUD();

@@ -60,6 +60,8 @@
 #include "r_data/sprites.h"
 #include "serializer.h"
 #include "wi_stuff.h"
+#include "vm.h"
+#include "types.h"
 
 static TArray<FPropertyInfo*> properties;
 static TArray<AFuncDesc> AFTable;

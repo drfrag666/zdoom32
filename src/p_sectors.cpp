@@ -36,7 +36,7 @@
 #include "r_sky.h"
 #include "r_data/colormaps.h"
 #include "g_levellocals.h"
-#include "virtual.h"
+#include "vm.h"
 
 
 // [RH]
@@ -1468,7 +1468,7 @@ DEFINE_ACTION_FUNCTION(_Sector, NextLowestFloorAt)
 			 VMReturn ret;
 			 int didit;
 			 ret.IntAt(&didit);
-			 GlobalVMStack.Call(func, params, 3, &ret, 1, nullptr);
+			 VMCall(func, params, 3, &ret, 1);
 
 			 if (didit)
 			 {
