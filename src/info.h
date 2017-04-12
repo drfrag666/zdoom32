@@ -291,7 +291,6 @@ struct FActorInfo
 
 class PClassActor : public PClass
 {
-	DECLARE_CLASS(PClassActor, PClass);
 protected:
 public:
 	static void StaticInit ();
