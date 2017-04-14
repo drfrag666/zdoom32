@@ -105,7 +105,6 @@ void FCanvasTexture::MakeTexture ()
 {
 	Canvas = new DSimpleCanvas (Width, Height);
 	Canvas->Lock ();
-	GC::AddSoftRoot(Canvas);
 	if (Width != Height || Width != Canvas->GetPitch())
 	{
 		Pixels = new uint8_t[Width*Height];
@@ -132,9 +131,7 @@ void FCanvasTexture::Unload ()
 
 	if (Canvas != NULL)
 	{
-		GC::DelSoftRoot(Canvas);
-		Canvas->Destroy();
-		Canvas = NULL;
+		delete Canvas;
 	}
 }
 

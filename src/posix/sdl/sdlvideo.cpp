@@ -26,7 +26,7 @@
 
 class SDLFB : public DFrameBuffer
 {
-	DECLARE_CLASS(SDLFB, DFrameBuffer)
+	typedef DFrameBuffer Super;
 public:
 	SDLFB (int width, int height, bool fullscreen, SDL_Window *oldwin);
 	~SDLFB ();
@@ -78,8 +78,6 @@ private:
 
 	SDLFB () {}
 };
-
-IMPLEMENT_CLASS(SDLFB, false, false)
 
 struct MiniModeInfo
 {

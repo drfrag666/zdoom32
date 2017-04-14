@@ -197,9 +197,8 @@ struct VMVa_List
 //
 // [RH] Made screens more implementation-independant:
 //
-class DCanvas : public DObject
+class DCanvas
 {
-	DECLARE_ABSTRACT_CLASS (DCanvas, DObject)
 public:
 	DCanvas (int width, int height);
 	virtual ~DCanvas ();
@@ -314,7 +313,7 @@ private:
 
 class DSimpleCanvas : public DCanvas
 {
-	DECLARE_CLASS (DSimpleCanvas, DCanvas)
+	typedef DCanvas Super;
 public:
 	DSimpleCanvas (int width, int height);
 	~DSimpleCanvas ();
@@ -354,7 +353,7 @@ public:
 
 class DFrameBuffer : public DSimpleCanvas
 {
-	DECLARE_ABSTRACT_CLASS (DFrameBuffer, DSimpleCanvas)
+	typedef DSimpleCanvas Super;
 public:
 	DFrameBuffer (int width, int height);
 
