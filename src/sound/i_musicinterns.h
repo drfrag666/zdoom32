@@ -84,6 +84,7 @@ public:
 	virtual void WildMidiSetOption(int opt, int set);
 	virtual bool Preprocess(MIDIStreamer *song, bool looping);
 	virtual FString GetStats();
+	virtual int GetDeviceType() const { return MDEV_DEFAULT; }
 };
 
 
@@ -192,6 +193,7 @@ protected:
 	void HandleLongEvent(const uint8_t *data, int len);
 	void ComputeOutput(float *buffer, int len);
 	bool ServiceStream(void *buff, int numbytes);
+	int GetDeviceType() const override { return MDEV_OPL; }
 };
 
 // OPL dumper implementation of a MIDI output device ------------------------
@@ -218,6 +220,7 @@ public:
 	int Open(MidiCallback, void *userdata);
 	void PrecacheInstruments(const uint16_t *instruments, int count);
 	FString GetStats();
+	int GetDeviceType() const override { return MDEV_GUS; }
 
 protected:
 	Timidity::Renderer *Renderer;
@@ -252,6 +255,7 @@ public:
 	int Open(MidiCallback, void *userdata);
 	void PrecacheInstruments(const uint16_t *instruments, int count);
 	FString GetStats();
+	int GetDeviceType() const override { return MDEV_WILDMIDI; }
 
 protected:
 	WildMidi_Renderer *Renderer;
@@ -286,6 +290,7 @@ public:
 	void FluidSettingInt(const char *setting, int value);
 	void FluidSettingNum(const char *setting, double value);
 	void FluidSettingStr(const char *setting, const char *value);
+	int GetDeviceType() const override { return MDEV_FLUIDSYNTH; }
 
 protected:
 	void HandleEvent(int status, int parm1, int parm2);
@@ -359,6 +364,7 @@ public:
 	void WildMidiSetOption(int opt, int set);
 	void CreateSMF(TArray<uint8_t> &file, int looplimit=0);
 	int ServiceEvent();
+	int GetDeviceType() const override { return MIDI->GetDeviceType(); }
 
 protected:
 	MIDIStreamer(const char *dumpname, EMidiDevice type);
@@ -677,5 +683,6 @@ MusInfo *SndFile_OpenSong(FileReader &fr);
 // --------------------------------------------------------------------------
 
 extern MusInfo *currSong;
+void MIDIDeviceChanged(int newdev, bool force = false);
 
 EXTERN_CVAR (Float, snd_musicvolume)
