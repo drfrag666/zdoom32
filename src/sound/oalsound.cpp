@@ -43,7 +43,6 @@
 #include <chrono>
 #include <functional>
 
-#include "except.h"
 #include "doomstat.h"
 #include "templates.h"
 #include "oalsound.h"
