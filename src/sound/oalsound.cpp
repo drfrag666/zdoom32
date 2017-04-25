@@ -216,7 +216,7 @@ class OpenALSoundStream : public SoundStream
 		size_t got = self->Decoder->read((char*)ptr, length);
 		if(got < (unsigned int)length)
 		{
-			if(!self->Looping || !self->Decoder->seek(0, false))
+			if(!self->Looping || !self->Decoder->seek(0, false, true))
 				return false;
 			got += self->Decoder->read((char*)ptr+got, length-got);
 		}
@@ -365,7 +365,7 @@ public:
 	virtual bool SetPosition(unsigned int ms_pos)
 	{
 		std::unique_lock<std::mutex> lock(Renderer->StreamLock);
-		if(!Decoder->seek(ms_pos, true))
+		if(!Decoder->seek(ms_pos, true, false))
 			return false;
 
 		if(!Playing.load())
