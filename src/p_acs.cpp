@@ -8871,7 +8871,6 @@ scriptwait:
 					{
 						static const char bar[] = TEXTCOLOR_ORANGE "\n\35\36\36\36\36\36\36\36\36\36\36\36\36\36\36\36\36\36\36\36"
 					"\36\36\36\36\36\36\36\36\36\36\36\36\37" TEXTCOLOR_NORMAL "\n";
-						static const char logbar[] = "\n<------------------------------->\n";
 						char consolecolor[3];
 
 						consolecolor[0] = '\x1c';
