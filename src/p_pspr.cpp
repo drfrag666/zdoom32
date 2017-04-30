@@ -1356,6 +1356,12 @@ void player_t::TickPSprites()
 	}
 }
 
+DEFINE_ACTION_FUNCTION(_PlayerInfo, TickPSprites)
+{
+	PARAM_SELF_STRUCT_PROLOGUE(player_t);
+	self->TickPSprites();
+	return 0;
+}
 //------------------------------------------------------------------------
 //
 //
