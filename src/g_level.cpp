@@ -1472,6 +1472,12 @@ bool FLevelLocals::IsCrouchingAllowed() const
 	return !(level.flags & LEVEL_CROUCH_NO);
 }
 
+DEFINE_ACTION_FUNCTION(FLevelLocals, IsCrouchingAllowed)
+{
+	PARAM_SELF_STRUCT_PROLOGUE(FLevelLocals);
+	ACTION_RETURN_BOOL(self->IsCrouchingAllowed());
+}
+
 //==========================================================================
 //
 //
