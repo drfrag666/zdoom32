@@ -2143,6 +2143,7 @@ FMODMNU_BUFFERCOUNT		= "Buffer count";
 OPENALMNU_TITLE				= "OPENAL OPTIONS";
 OPENALMNU_PLAYBACKDEVICE	= "Playback device";
 OPENALMNU_ENABLEEFX			= "Enable EFX";
+OPENALMNU_HRTF				= "HRTF";
 
 // Advanced Sound Options
 ADVSNDMNU_TITLE				= "ADVANCED SOUND OPTIONS";
@@ -2222,6 +2223,7 @@ OPTVAL_ON					= "On";
 OPTVAL_LOW					= "Low";
 OPTVAL_MEDIUM				= "Medium";
 OPTVAL_HIGH					= "High";
+OPTVAL_AUTO					= "Auto";
 OPTVAL_MALE					= "Male";
 OPTVAL_FEMALE				= "Female";
 OPTVAL_OTHER				= "Other";
