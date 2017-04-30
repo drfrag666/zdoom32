@@ -161,7 +161,7 @@ EXTERN_CVAR (Int, snd_channels)
 EXTERN_CVAR (Int, snd_samplerate)
 EXTERN_CVAR (Bool, snd_waterreverb)
 EXTERN_CVAR (Bool, snd_pitched)
-CVAR (Int, oal_hrtf, 0, CVAR_ARCHIVE|CVAR_GLOBALCONFIG)
+CVAR (Int, oal_hrtf, -1, CVAR_ARCHIVE|CVAR_GLOBALCONFIG)
 
 
 #define MAKE_PTRID(x)  ((void*)(uintptr_t)(x))
@@ -785,7 +785,7 @@ OpenALSoundRenderer::OpenALSoundRenderer()
 	if(ALC.SOFT_HRTF)
 	{
 		attribs.Push(ALC_HRTF_SOFT);
-		if(*oal_hrtf < 0)
+		if(*oal_hrtf == 0)
 			attribs.Push(ALC_FALSE);
 		else if(*oal_hrtf > 0)
 			attribs.Push(ALC_TRUE);
