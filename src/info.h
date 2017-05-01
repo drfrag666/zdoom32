@@ -360,6 +360,7 @@ struct FDoomEdEntry
 	PClassActor *Type;
 	short Special;
 	signed char ArgsDefined;
+	bool NoSkillFlags;
 	int Args[5];
 };
 
