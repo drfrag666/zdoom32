@@ -962,6 +962,10 @@ void R_ProjectSprite (AActor *thing, int fakeside, F3DFloor *fakefloor, F3DFloor
 		// [RH] Flip for mirrors
 		renderflags ^= MirrorFlags & RF_XFLIP;
 
+		// [SP] SpriteFlip
+		if (thing->flags7 & MF7_SPRITEFLIP)
+			renderflags ^= RF_XFLIP;
+
 		// calculate edges of the shape
 		const double thingxscalemul = spriteScale.X / tex->Scale.X;
 
