@@ -4355,7 +4355,7 @@ static ETraceStatus CheckForActor(FTraceResults &res, void *userdata)
 //==========================================================================
 
 AActor *P_LineAttack(AActor *t1, DAngle angle, double distance,
-	DAngle pitch, int damage, FName damageType, PClassActor *pufftype, int flags, FTranslatedLineTarget*victim, int *actualdamage)
+	DAngle pitch, int damage, FName damageType, PClassActor *pufftype, int flags, FTranslatedLineTarget*victim, int *actualdamage, double sz)
 {
 	bool nointeract = !!(flags & LAF_NOINTERACT);
 	DVector3 direction;
@@ -4399,6 +4399,12 @@ AActor *P_LineAttack(AActor *t1, DAngle angle, double distance,
 	{
 		shootz += 8;
 	}
+
+	// [MC] If overriding, set it to the base of the actor.
+	// Offset by the amount specified.
+	if (flags & LAF_OVERRIDEZ)
+		shootz = t1->Z();
+	shootz += sz;
 
 	// We need to check the defaults of the replacement here
 	AActor *puffDefaults = GetDefaultByType(pufftype->GetReplacement());
@@ -4656,7 +4662,7 @@ AActor *P_LineAttack(AActor *t1, DAngle angle, double distance,
 }
 
 AActor *P_LineAttack(AActor *t1, DAngle angle, double distance,
-	DAngle pitch, int damage, FName damageType, FName pufftype, int flags, FTranslatedLineTarget *victim, int *actualdamage)
+	DAngle pitch, int damage, FName damageType, FName pufftype, int flags, FTranslatedLineTarget *victim, int *actualdamage, double sz)
 {
 	PClassActor *type = PClass::FindActor(pufftype);
 	if (type == NULL)
@@ -4670,7 +4676,7 @@ AActor *P_LineAttack(AActor *t1, DAngle angle, double distance,
 	}
 	else
 	{
-		return P_LineAttack(t1, angle, distance, pitch, damage, damageType, type, flags, victim, actualdamage);
+		return P_LineAttack(t1, angle, distance, pitch, damage, damageType, type, flags, victim, actualdamage, sz);
 	}
 }
 
@@ -4685,10 +4691,11 @@ DEFINE_ACTION_FUNCTION(AActor, LineAttack)
 	PARAM_CLASS(puffType, AActor);
 	PARAM_INT_DEF(flags);
 	PARAM_POINTER_DEF(victim, FTranslatedLineTarget);
+	PARAM_FLOAT_DEF(sz);
 
 	int acdmg;
 	if (puffType == nullptr) puffType = PClass::FindActor("BulletPuff");	// P_LineAttack does not work without a puff to take info from.
-	auto puff = P_LineAttack(self, angle, distance, pitch, damage, damageType, puffType, flags, victim, &acdmg);
+	auto puff = P_LineAttack(self, angle, distance, pitch, damage, damageType, puffType, flags, victim, &acdmg, sz);
 	if (numret > 0) ret[0].SetObject(puff);
 	if (numret > 1) ret[1].SetInt(acdmg), numret = 2;
 	return numret;
