@@ -1166,7 +1166,7 @@ static void R_ProjectWallSprite(AActor *thing, const DVector3 &pos, FTextureID p
 	left.X = pos.X - x1 * angcos - ViewPos.X;
 	left.Y = pos.Y - x1 * angsin - ViewPos.Y;
 	right.X = left.X + x2 * angcos;
-	right.Y = right.Y + x2 * angsin;
+	right.Y = left.Y + x2 * angsin;
 
 	// Is it off-screen?
 	if (wallc.Init(left, right, TOO_CLOSE_Z))
