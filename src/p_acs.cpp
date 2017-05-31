@@ -9539,7 +9539,7 @@ scriptwait:
 				}
 				else
 				{
-					STACK(1) = DoubleToACS(pcd == PCD_GETACTORX ? actor->X() : pcd == PCD_GETACTORY ? actor->Y() : actor->Z());
+					STACK(1) = DoubleToACS(pcd == PCD_GETACTORX ? actor->X() : actor->Y());
 				}
 			}
 			break;
