@@ -260,6 +260,8 @@ enum EExplodeFlags
 	XF_NOTMISSILE = 4,
 	XF_EXPLICITDAMAGETYPE = 8,
 	XF_NOSPLASH = 16,
+	XF_THRUSTZ = 32,
+
 };
 
 // Flags for A_RadiusThrust
