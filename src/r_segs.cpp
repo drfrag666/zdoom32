@@ -136,7 +136,7 @@ FTexture		*rw_pic;
 static fixed_t	*maskedtexturecol;
 
 static void R_RenderDecal (side_t *wall, DBaseDecal *first, drawseg_t *clipper, int pass);
-static void WallSpriteColumn (void (*drawfunc)(const BYTE *column, const FTexture::Span *spans));
+static void WallSpriteColumn (void (*drawfunc)(const uint8_t *column, const FTexture::Span *spans));
 
 inline bool IsFogBoundary (sector_t *front, sector_t *back)
 {
@@ -2121,7 +2121,7 @@ static void R_RenderDecal (side_t *wall, DBaseDecal *decal, drawseg_t *clipper, 
 	DVector2 decal_left, decal_right, decal_pos;
 	int x1, x2;
 	double yscale;
-	BYTE flipx;
+	uint8_t flipx;
 	double zpos;
 	int needrepeat = 0;
 	sector_t *front, *back;
@@ -2173,7 +2173,7 @@ static void R_RenderDecal (side_t *wall, DBaseDecal *decal, drawseg_t *clipper, 
 	}
 
 	WallSpriteTile = TexMan(decal->PicNum, true);
-	flipx = (BYTE)(decal->RenderFlags & RF_XFLIP);
+	flipx = (uint8_t)(decal->RenderFlags & RF_XFLIP);
 
 	if (WallSpriteTile == NULL || WallSpriteTile->UseType == FTexture::TEX_Null)
 	{

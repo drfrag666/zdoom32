@@ -50,11 +50,11 @@ public:
 	friend class SDLVideo;
 
 	virtual void SetVSync (bool vsync);
-	virtual void ScaleCoordsFromWindow(SWORD &x, SWORD &y);
+	virtual void ScaleCoordsFromWindow(int16_t &x, int16_t &y);
 
 private:
 	PalEntry SourcePalette[256];
-	BYTE GammaTable[3][256];
+	uint8_t GammaTable[3][256];
 	PalEntry Flash;
 	int FlashAmount;
 	float Gamma;

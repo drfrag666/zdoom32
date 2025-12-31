@@ -104,9 +104,9 @@ void FSoftwareRenderer::PrecacheTexture(FTexture *tex, int cache)
 	}
 }
 
-void FSoftwareRenderer::Precache(BYTE *texhitlist, TMap<PClassActor*, bool> &actorhitlist)
+void FSoftwareRenderer::Precache(uint8_t *texhitlist, TMap<PClassActor*, bool> &actorhitlist)
 {
-	BYTE *spritelist = new BYTE[sprites.Size()];
+	uint8_t *spritelist = new uint8_t[sprites.Size()];
 	TMap<PClassActor*, bool>::Iterator it(actorhitlist);
 	TMap<PClassActor*, bool>::Pair *pair;
 
@@ -319,7 +319,7 @@ void FSoftwareRenderer::CopyStackedViewParameters()
 
 void FSoftwareRenderer::RenderTextureView (FCanvasTexture *tex, AActor *viewpoint, int fov)
 {
-	BYTE *Pixels = const_cast<BYTE*>(tex->GetPixels());
+	uint8_t *Pixels = const_cast<uint8_t*>(tex->GetPixels());
 	DSimpleCanvas *Canvas = tex->GetCanvas();
 
 	// curse Doom's overuse of global variables in the renderer.

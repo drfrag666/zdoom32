@@ -627,19 +627,19 @@ extern FTexture *rw_pic;
 // Allow for layer skies up to 512 pixels tall. This is overkill,
 // since the most anyone can ever see of the sky is 500 pixels.
 // We need 4 skybufs because R_DrawSkySegment can draw up to 4 columns at a time.
-static BYTE skybuf[4][512];
+static uint8_t skybuf[4][512];
 static DWORD lastskycol[4];
 static int skycolplace;
 
 // Get a column of sky when there is only one sky texture.
-static const BYTE *R_GetOneSkyColumn (FTexture *fronttex, int x)
+static const uint8_t *R_GetOneSkyColumn (FTexture *fronttex, int x)
 {
 	angle_t column = (skyangle + xtoviewangle[x]) ^ skyflip;
 	return fronttex->GetColumn((UMulScale16(column, frontcyl) + frontpos) >> FRACBITS, NULL);
 }
 
 // Get a column of sky when there are two overlapping sky textures
-static const BYTE *R_GetTwoSkyColumns (FTexture *fronttex, int x)
+static const uint8_t *R_GetTwoSkyColumns (FTexture *fronttex, int x)
 {
 	DWORD ang = (skyangle + xtoviewangle[x]) ^ skyflip;
 	DWORD angle1 = (DWORD)((UMulScale16(ang, frontcyl) + frontpos) >> FRACBITS);
@@ -659,14 +659,14 @@ static const BYTE *R_GetTwoSkyColumns (FTexture *fronttex, int x)
 	}
 
 	lastskycol[skycolplace] = skycol;
-	BYTE *composite = skybuf[skycolplace];
+	uint8_t *composite = skybuf[skycolplace];
 	skycolplace = (skycolplace + 1) & 3;
 
 	// The ordering of the following code has been tuned to allow VC++ to optimize
 	// it well. In particular, this arrangement lets it keep count in a register
 	// instead of on the stack.
-	const BYTE *front = fronttex->GetColumn (angle1, NULL);
-	const BYTE *back = backskytex->GetColumn (angle2, NULL);
+	const uint8_t *front = fronttex->GetColumn (angle1, NULL);
+	const uint8_t *back = backskytex->GetColumn (angle2, NULL);
 
 	int count = MIN<int> (512, MIN (backskytex->GetHeight(), fronttex->GetHeight()));
 	i = 0;
@@ -707,8 +707,8 @@ static void R_DrawSkyColumnStripe(int start_x, int y1, int y2, int columns, doub
 		angle1 = (DWORD)((UMulScale16(ang, frontcyl) + frontpos) >> FRACBITS);
 		angle2 = (DWORD)((UMulScale16(ang, backcyl) + backpos) >> FRACBITS);
 
-		dc_wall_source[i] = (const BYTE *)frontskytex->GetColumn(angle1, nullptr);
-		dc_wall_source2[i] = backskytex ? (const BYTE *)backskytex->GetColumn(angle2, nullptr) : nullptr;
+		dc_wall_source[i] = (const uint8_t *)frontskytex->GetColumn(angle1, nullptr);
+		dc_wall_source2[i] = backskytex ? (const uint8_t *)backskytex->GetColumn(angle2, nullptr) : nullptr;
 
 		dc_wall_iscale[i] = uv_step;
 		dc_wall_texturefrac[i] = uv_pos;

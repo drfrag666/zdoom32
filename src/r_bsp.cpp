@@ -97,10 +97,10 @@ TArray<size_t>	InterestingDrawsegs;
 FWallCoords		WallC;
 FWallTmapVals	WallT;
 
-static BYTE		FakeSide;
+static uint8_t		FakeSide;
 
 int WindowLeft, WindowRight;
-WORD MirrorFlags;
+uint16_t MirrorFlags;
 TArray<PortalDrawseg> WallPortals(1000);	// note: this array needs to go away as reallocation can cause crashes.
 
 
@@ -1311,7 +1311,7 @@ void R_Subsector (subsector_t *sub)
 	if ((unsigned int)(sub - subsectors) < (unsigned int)numsubsectors)
 	{ // Only do it for the main BSP.
 		int shade = LIGHT2SHADE((floorlightlevel + ceilinglightlevel)/2 + r_actualextralight);
-		for (WORD i = ParticlesInSubsec[(unsigned int)(sub-subsectors)]; i != NO_PARTICLE; i = Particles[i].snext)
+		for (uint16_t i = ParticlesInSubsec[(unsigned int)(sub-subsectors)]; i != NO_PARTICLE; i = Particles[i].snext)
 		{
 			R_ProjectParticle (Particles + i, subsectors[sub-subsectors].sector, shade, FakeSide);
 		}
@@ -1394,7 +1394,7 @@ void R_RenderBSPNode (void *node)
 
 		node = bsp->children[side];
 	}
-	R_Subsector ((subsector_t *)((BYTE *)node - 1));
+	R_Subsector ((subsector_t *)((uint8_t *)node - 1));
 }
 
 }

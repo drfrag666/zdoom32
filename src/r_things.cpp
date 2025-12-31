@@ -148,7 +148,7 @@ short			screenheightarray[MAXWIDTH];
 //
 
 int OffscreenBufferWidth, OffscreenBufferHeight;
-BYTE *OffscreenColorBuffer;
+uint8_t *OffscreenColorBuffer;
 FCoverageBuffer *OffscreenCoverageBuffer;
 
 //
@@ -261,7 +261,7 @@ bool			sprflipvert;
 void R_DrawMaskedColumn (FTexture *tex, fixed_t col, bool useRt, bool unmasked)
 {
 	const FTexture::Span *span;
-	const BYTE *column;
+	const uint8_t *column;
 
 	column = tex->GetColumn(col >> FRACBITS, &span);
 
@@ -1291,7 +1291,7 @@ void R_DrawPSprite(DPSprite *pspr, AActor *owner, float bobx, float boby, double
 	spritedef_t*		sprdef;
 	spriteframe_t*		sprframe;
 	FTextureID			picnum;
-	WORD				flip;
+	uint16_t				flip;
 	FTexture*			tex;
 	vissprite_t*		vis;
 	bool				noaccel;
@@ -1698,7 +1698,7 @@ void R_DrawRemainingPlayerSprites()
 			colormap->Desaturate == 0)
 		{
 			overlay = colormap->Fade;
-			overlay.a = BYTE(((vis->colormap - colormap->Maps) >> 8) * 255 / NUMCOLORMAPS);
+			overlay.a = uint8_t(((vis->colormap - colormap->Maps) >> 8) * 255 / NUMCOLORMAPS);
 		}
 		else
 		{
@@ -2469,7 +2469,7 @@ void R_ProjectParticle (particle_t *particle, const sector_t *sector, int shade,
 	int 				x1, x2, y1, y2;
 	vissprite_t*		vis;
 	sector_t*			heightsec = NULL;
-	BYTE*				map;
+	uint8_t*				map;
 
 	// [ZZ] Particle not visible through the portal plane
 	if (CurrentPortal && !!P_PointOnLineSide(particle->Pos, CurrentPortal->dst))
@@ -2647,9 +2647,9 @@ void R_DrawParticle_C (vissprite_t *vis)
 {
 	DWORD *bg2rgb;
 	int spacing;
-	BYTE *dest;
+	uint8_t *dest;
 	DWORD fg;
-	BYTE color = vis->colormap[vis->startfrac];
+	uint8_t color = vis->colormap[vis->startfrac];
 	int yl = vis->y1;
 	int ycount = vis->y2 - yl + 1;
 	int x1 = vis->x1;
@@ -2871,9 +2871,9 @@ void R_DrawVoxel(const FVector3 &globalpos, FAngle viewangle,
 			case 8: case 7: x2 = gyinc;			y2 = -gxinc;		break;
 			case 6: case 3: x2 = gxinc+gyinc;	y2 = gyinc-gxinc;	break;
 		}
-		BYTE oand = (1 << int(xs<backx)) + (1 << (int(ys<backy)+2));
-		BYTE oand16 = oand + 16;
-		BYTE oand32 = oand + 32;
+		uint8_t oand = (1 << int(xs<backx)) + (1 << (int(ys<backy)+2));
+		uint8_t oand16 = oand + 16;
+		uint8_t oand32 = oand + 32;
 
 		if (yi > 0) { dagxinc =  gxinc; dagyinc =  FixedMul(gyinc, viewingrangerecip); }
 			   else { dagxinc = -gxinc; dagyinc = -FixedMul(gyinc, viewingrangerecip); }
@@ -2887,7 +2887,7 @@ void R_DrawVoxel(const FVector3 &globalpos, FAngle viewangle,
 
 		for (x = xs; x != xe; x += xi)
 		{
-			BYTE *slabxoffs = &mip->SlabData[mip->OffsetX[x]];
+			uint8_t *slabxoffs = &mip->SlabData[mip->OffsetX[x]];
 			short *xyoffs = &mip->OffsetXY[x * (mip->SizeY + 1)];
 
 			nx = FixedMul(ggxstart + ggxinc[x], viewingrangerecip) + x1;
@@ -2914,9 +2914,9 @@ void R_DrawVoxel(const FVector3 &globalpos, FAngle viewangle,
 
 				fixed_t l1 = xs_RoundToInt(centerxwidebig_f / (ny - yoff));
 				fixed_t l2 = xs_RoundToInt(centerxwidebig_f / (ny + yoff));
-				for (; voxptr < voxend; voxptr = (kvxslab_t *)((BYTE *)voxptr + voxptr->zleng + 3))
+				for (; voxptr < voxend; voxptr = (kvxslab_t *)((uint8_t *)voxptr + voxptr->zleng + 3))
 				{
-					const BYTE *col = voxptr->col;
+					const uint8_t *col = voxptr->col;
 					int zleng = voxptr->zleng;
 					int ztop = voxptr->ztop;
 					fixed_t z1, z2;
@@ -3248,12 +3248,12 @@ void R_CheckOffscreenBuffer(int width, int height, bool spansonly)
 	{
 		if (OffscreenColorBuffer == NULL)
 		{
-			OffscreenColorBuffer = new BYTE[width * height];
+			OffscreenColorBuffer = new uint8_t[width * height];
 		}
 		else if (OffscreenBufferWidth != width || OffscreenBufferHeight != height)
 		{
 			delete[] OffscreenColorBuffer;
-			OffscreenColorBuffer = new BYTE[width * height];
+			OffscreenColorBuffer = new uint8_t[width * height];
 		}
 	}
 	OffscreenBufferWidth = width;

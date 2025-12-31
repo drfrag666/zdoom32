@@ -87,12 +87,12 @@ struct vissprite_t
 	sector_t		*sector;		// [RH] sector this sprite is in
 	F3DFloor		*fakefloor;
 	F3DFloor		*fakeceiling;
-	BYTE			bIsVoxel:1;		// [RH] Use voxel instead of pic
-	BYTE			bWallSprite:1;	// [RH] This is a wall sprite
-	BYTE			bSplitSprite:1;	// [RH] Sprite was split by a drawseg
-	BYTE			bInMirror:1;	// [RH] Sprite is "inside" a mirror
-	BYTE			FakeFlatStat;	// [RH] which side of fake/floor ceiling sprite is on
-	BYTE			ColormapNum;	// Which colormap is rendered (needed for shaded drawer)
+	uint8_t			bIsVoxel:1;		// [RH] Use voxel instead of pic
+	uint8_t			bWallSprite:1;	// [RH] This is a wall sprite
+	uint8_t			bSplitSprite:1;	// [RH] Sprite was split by a drawseg
+	uint8_t			bInMirror:1;	// [RH] Sprite is "inside" a mirror
+	uint8_t			FakeFlatStat;	// [RH] which side of fake/floor ceiling sprite is on
+	uint8_t			ColormapNum;	// Which colormap is rendered (needed for shaded drawer)
 	short 			renderflags;
 	DWORD			Translation;	// [RH] for color translation
 	lighttable_t	*colormap;
