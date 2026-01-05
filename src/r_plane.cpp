@@ -694,8 +694,8 @@ static void R_DrawSkyColumnStripe(int start_x, int y1, int y2, int columns, doub
 		double v = (texturemid + uv_stepd * (y1 - CenterY + 0.5)) / height;
 		double v_step = uv_stepd / height;
 
-		uint32_t uv_pos = (uint32_t)(v * 0x01000000);
-		uint32_t uv_step = (uint32_t)(v_step * 0x01000000);
+		uint32_t uv_pos = (uint32_t)(int32_t)(v * 0x01000000);
+		uint32_t uv_step = (uint32_t)(int32_t)(v_step * 0x01000000);
 
 		int x = start_x + i;
 		if (MirrorFlags & RF_XFLIP)
