@@ -940,7 +940,7 @@ void DBaseStatusBar::CallDraw(EHudState state)
 {
 	IFVIRTUAL(DBaseStatusBar, Draw)
 	{
-		VMValue params[] = { (DObject*)this, state, r_viewpoint.TicFrac };
+		VMValue params[] = { (DObject*)this, state, r_TicFracF };
 		GlobalVMStack.Call(func, params, countof(params), nullptr, 0);
 	}
 	else Draw(state);
