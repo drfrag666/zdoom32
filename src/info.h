@@ -242,7 +242,6 @@ struct FDropItem;
 
 struct FActorInfo
 {
-	TArray<FInternalLightAssociation *> LightAssociations;
 	PClassActor *Replacement = nullptr;
 	PClassActor *Replacee = nullptr;
 	FState *OwnedStates = nullptr;
