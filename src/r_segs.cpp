@@ -47,6 +47,7 @@
 #include "r_draw.h"
 #include "v_palette.h"
 #include "r_data/colormaps.h"
+#include "g_levellocals.h"
 
 #define WALLYREPEAT 8
 
