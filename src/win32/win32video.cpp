@@ -236,7 +236,7 @@ bool Win32Video::InitD3D9 ()
 	{
 		AddLowResModes ();
 	}
-	// AddLetterboxModes ();
+	AddLetterboxModes ();
 	if (m_Modes == NULL)
 	{ // Too bad. We didn't find any modes for D3D9. We probably won't find any
 	  // for DDraw either...
@@ -334,7 +334,7 @@ void Win32Video::InitDDraw ()
 		}
 		AddLowResModes ();
 	}
-	// AddLetterboxModes ();
+	AddLetterboxModes ();
 }
 
 // Returns true if fullscreen, false otherwise
