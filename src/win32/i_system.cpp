@@ -967,7 +967,11 @@ static void DoPrintStr(const char *cp, HWND edit, HANDLE StdOut)
 			buf[bpos] = 0;
 			if (edit != NULL)
 			{
+#if defined(__MINGW32__)
+				SendMessage(edit, EM_REPLACESEL, FALSE, (LPARAM)buf);
+#else
 				ToEditControl(edit, buf, wbuf, bpos);
+#endif
 			}
 			if (StdOut != NULL)
 			{
@@ -1034,7 +1038,11 @@ static void DoPrintStr(const char *cp, HWND edit, HANDLE StdOut)
 		buf[bpos] = 0;
 		if (edit != NULL)
 		{
+#if defined(__MINGW32__)
+			SendMessage(edit, EM_REPLACESEL, FALSE, (LPARAM)buf);
+#else
 			ToEditControl(edit, buf, wbuf, bpos);
+#endif
 		}
 		if (StdOut != NULL)
 		{
