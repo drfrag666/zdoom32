@@ -37,6 +37,7 @@
 #include "s_sound.h"
 #include "dthinker.h"
 #include "types.h"
+#include <limits>
 
 
 FTypeTable TypeTable;

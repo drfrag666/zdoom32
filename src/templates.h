@@ -41,6 +41,8 @@
 
 #include <stdlib.h>
 #include <utility>
+#include <algorithm>
+#include <iterator>
 
 //==========================================================================
 //
