@@ -351,6 +351,7 @@ CUSTOM_CVAR (Bool, d3d_nogammaramp, false, CVAR_ARCHIVE|CVAR_GLOBALCONFIG|CVAR_N
 	NewHeight = screen->GetHeight();
 	NewBits = DisplayBits;
 	setmodeneeded = true;
+	Printf("This won't take effect until " GAMENAME " is restarted.\n");
 }
 
 CUSTOM_CVAR (Float, vid_winscale, 1.f, CVAR_ARCHIVE|CVAR_GLOBALCONFIG)

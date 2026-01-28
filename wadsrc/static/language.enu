@@ -1803,6 +1803,7 @@ DSPLYMNU_BRIGHTNESS				= "Brightness";
 DSPLYMNU_VSYNC					= "Vertical Sync";
 DSPLYMNU_CAPFPS					= "Rendering Interpolation";
 DSPLYMNU_WIPETYPE				= "Screen wipe style";
+DSPLYMNU_NOGAMMARAMP			= "Gamma respects blue light filters";
 DSPLYMNU_SHOWENDOOM				= "Show ENDOOM screen";
 DSPLYMNU_BLOODFADE				= "Blood Flash Intensity";
 DSPLYMNU_PICKUPFADE				= "Pickup Flash Intensity";

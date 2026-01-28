@@ -696,6 +696,7 @@ OptionMenu "VideoOptions"
 
 	IfOption(Windows)
 	{
+		Option	"$DSPLYMNU_NOGAMMARAMP",		"d3d_nogammaramp", "YesNo"
 		Option	"$DSPLYMNU_SHOWENDOOM",			"showendoom", "Endoom"
 		//Option "$DSPLYMNU_PALLETEHACK", 		"vid_palettehack", "OnOff"
 		//Option "$DSPLYMNU_ATTACHEDSURFACES", 	"vid_attachedsurfaces", "OnOff"
